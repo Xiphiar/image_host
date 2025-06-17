@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: image-host-backend
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./uploads:/app/uploads
+      - ./whitelist.txt:/app/whitelist.txt
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+    networks:
+      - image-host-network
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        - VITE_API_URL=http://localhost:3001
+    container_name: image-host-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - image-host-network
+    restart: unless-stopped
+
+volumes:
+  uploads:
+
+networks:
+  image-host-network:
+    driver: bridge 

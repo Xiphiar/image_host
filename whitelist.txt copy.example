@@ -1,0 +1,11 @@
+# Example IP whitelist file
+# Add comma-separated IP addresses that are allowed to upload files
+# Remove this file or leave it empty to allow uploads from any IP
+# IPv4 and IPv6 addresses are supported
+#
+# Examples:
+# 192.168.1.100, 10.0.0.5, 172.16.0.10
+# ::1, 127.0.0.1
+#
+# Uncomment and modify the line below:
+# 127.0.0.1, ::1 
